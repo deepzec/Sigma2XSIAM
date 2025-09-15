@@ -1,4 +1,236 @@
-# Placeholder pipeline - will be replaced when user uploads the actual pipeline
-name: "cortex_xdm_placeholder"
-priority: 20
-transformations: []
+name: cortex_xdm_field_mapping
+priority: 10
+transformations:
+- id: window_linux_mapping
+  type: set_state
+  key: dataset_preset
+  val: datamodel dataset::xdr_data
+  rule_conditions:
+  - type: logsource
+    product: windows
+- id: juniper_data_mapping
+  type: set_state
+  key: dataset_preset
+  val: dataset::juniper_juniper_raw
+  rule_conditions:
+  - type: logsource
+    product: juniper
+
+- id: window_linux_mapping_field
+  type: field_name_mapping
+  mapping:
+        CommandLine: xdm.source.process.command_line
+        User: xdm.source.user.username
+        Company: xdm.source.process.company
+        Data: xdm.source.process.command_line
+        Description: xdm.event.description
+        ScriptBlockText: xdm.source.process.command_line
+        Details: xdm.event.description
+        EventID: xdm.event.id
+        EventType: xdm.event.type
+        FileName: xdm.target.file.filename
+        Image: xdm.source.process.name
+        c-useragent: xdm.source.user_agent
+        ImageLoaded: xdm.target.module.filename
+        IpAddress: xdm.source.ipv4
+        LogonType: xdm.logon.type
+        OriginalFileName: xdm.source.process.executable.filename
+        ParentCommandLine: xdr_data.causality_actor_process_command_line
+        ParentImage: xdr_data.causality_actor_process_image_path
+        ParentUser: xdr_data.causality_actor_effective_username
+        Product: xdr_data.actor_process_signature_product
+        RegistryValueName:
+            - xdr_data.action_registry_value_name
+            - xdm.target.registry.data
+        SubjectUserName: xdm.source.user.username
+        TargetFilename: xdm.target.file.filename
+        TargetObject: xdm.target.registry.key
+        TicketEncryptionType: xdm.auth.kerberos_tgs.encryption_type
+        host.ip: xdm.source.ipv4
+        program: xdm.source.process.name
+        payload: xdm.event.description
+        msg: xdm.event.description
+  rule_conditions:
+  - type: logsource
+    product: windows
+    
+- id: mac_mapping_field
+  type: field_name_mapping
+  mapping:
+        CommandLine: xdm.source.process.command_line
+        User: xdm.source.user.username
+        Company: xdm.source.process.company
+        Data: xdm.source.process.command_line
+        Description: xdm.event.description
+        ScriptBlockText: xdm.source.process.command_line
+        Details: xdm.event.description
+        EventID: xdm.event.id
+        EventType: xdm.event.type
+        FileName: xdm.target.file.filename
+        Image: xdm.source.process.name
+        c-useragent: xdm.source.user_agent
+        ImageLoaded: xdm.target.module.filename
+        IpAddress: xdm.source.ipv4
+        LogonType: xdm.logon.type
+        OriginalFileName: xdm.source.process.executable.filename
+        ParentCommandLine: xdr_data.causality_actor_process_command_line
+        ParentImage: xdr_data.causality_actor_process_image_path
+        ParentUser: xdr_data.causality_actor_effective_username
+        Product: xdr_data.actor_process_signature_product
+        RegistryValueName:
+            - xdr_data.action_registry_value_name
+            - xdm.target.registry.data
+        SubjectUserName: xdm.source.user.username
+        TargetFilename: xdm.target.file.filename
+        TargetObject: xdm.target.registry.key
+        TicketEncryptionType: xdm.auth.kerberos_tgs.encryption_type
+        host.ip: xdm.source.ipv4
+        program: xdm.source.process.name
+        payload: xdm.event.description
+        msg: xdm.event.description
+  rule_conditions:
+  - type: logsource
+    product: macos
+    
+- id: linux_mapping_field
+  type: field_name_mapping
+  mapping:
+        CommandLine: xdm.source.process.command_line
+        User: xdm.source.user.username
+        Company: xdm.source.process.company
+        Data: xdm.source.process.command_line
+        Description: xdm.event.description
+        ScriptBlockText: xdm.source.process.command_line
+        Details: xdm.event.description
+        EventID: xdm.event.id
+        EventType: xdm.event.type
+        FileName: xdm.target.file.filename
+        Image: xdm.source.process.name
+        c-useragent: xdm.source.user_agent
+        ImageLoaded: xdm.target.module.filename
+        IpAddress: xdm.source.ipv4
+        LogonType: xdm.logon.type
+        OriginalFileName: xdm.source.process.executable.filename
+        ParentCommandLine: xdr_data.causality_actor_process_command_line
+        ParentImage: xdr_data.causality_actor_process_image_path
+        ParentUser: xdr_data.causality_actor_effective_username
+        Product: xdr_data.actor_process_signature_product
+        RegistryValueName:
+            - xdr_data.action_registry_value_name
+            - xdm.target.registry.data
+        SubjectUserName: xdm.source.user.username
+        TargetFilename: xdm.target.file.filename
+        TargetObject: xdm.target.registry.key
+        TicketEncryptionType: xdm.auth.kerberos_tgs.encryption_type
+        host.ip: xdm.source.ipv4
+        DestinationHostname: xdm.target.host.hostname
+        DestinationIp: xdm.target.ipv4 
+        DestinationPort: xdm.target.port  
+        keywords: xdm.source.process.command_line
+        program: xdm.source.process.name
+        payload: xdm.event.description
+        msg: xdm.event.description
+        cidr: xdm.target.subnet
+  rule_conditions:
+  - type: logsource
+    product: linux
+
+- id: mde_mapping
+  type: field_name_mapping
+  mapping:
+        ActionType:
+            - xdm.event.original_event_type
+            - xdm.event.operation
+        InitiatingProcessFileName: xdm.source.process.executable.filename
+        InitiatingProcessFolderPath: xdm.source.process.executable.path
+  rule_conditions:
+  - type: logsource
+    product: mde
+- id: juniper_mapping
+  type: field_name_mapping
+  mapping:
+        _raw: _raw_log
+        dst_port: xdm.target.port
+  rule_conditions:
+  - type: logsource
+    product: juniper
+- id: network_mapping
+  type: field_name_mapping
+  mapping:
+        _raw: _raw_log
+        host: XDM_ALIAS.hostname
+        message: xdm.event.description
+  rule_conditions:
+  - type: logsource
+    product: network_device
+- id: databrick_mapping
+  type: field_name_mapping
+  mapping:
+        OperationName: azure_databricks_raw.operation_name
+        UserAgent: azure_databricks_raw.user_agent
+        SourceIPAddress: xdm.source.ipv4
+  rule_conditions:
+  - type: logsource
+    product: azure
+    service: databricks.accounts
+- id: proxy_mapping
+  type: field_name_mapping
+  mapping:
+        cs-host: xdm.network.http.domain
+        cs-method: xdm.network.http.method
+        cs-useragent: xdm.source.user_agent
+        c-useragent: xdm.source.user_agent
+        cs-request-body: xdm.event.description
+        cs-uri-query: xdm.event.description
+        dst_port: xdm.target.port 
+  rule_conditions:
+  - type: logsource
+    category: proxy
+
+- id: firewall_mapping
+  type: field_name_mapping
+  mapping:
+        src_port: xdm.source.port 
+        dst_port: xdm.target.port 
+  rule_conditions:
+  - type: logsource
+    category: firewall
+- id: dns_mapping
+  type: field_name_mapping
+  mapping:
+        query: xdm.network.dns.dns_question.name
+        record_type: xdm.network.dns.dns_resource_record.name 
+        answer:  xdm.network.dns.is_response   
+  rule_conditions:
+  - type: logsource
+    category: dns
+    
+- id: webserver_mapping
+  type: field_name_mapping
+  mapping:
+        cs-host: xdm.network.http.domain
+        cs-method: xdm.network.http.method
+        cs-request-body: xdm.event.description
+        cs-uri-query: xdm.event.description
+  rule_conditions:
+  - type: logsource
+    category: webserver
+- id: replace_quote
+  type: replace_string
+  regex: "^(\\*\\\\.+\\\\\\*)$"
+  replacement: "\\1"
+- id: add_condition
+  type: add_condition
+  conditions:
+    test: winevent
+  rule_conditions:
+  - type: logsource
+    product: juniper
+postprocessing:
+  - id: replace_query_pattern
+    type: replace
+    pattern: "dataset=juniper_juniper_raw"
+    replacement: "dataset=juniper_juniper_raw | alter test = _raw_log"
+    rule_conditions:
+      - type: logsource
+        product: juniper

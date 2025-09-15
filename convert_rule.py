@@ -62,62 +62,12 @@ try:
     with open(rule_file, "r", encoding='utf-8') as f:
         rule_yaml = f.read()
     
-    print("Debug: Rule YAML content:")
-    print("=" * 50)
-    print(rule_yaml)
-    print("=" * 50)
     
     sigma_rule = SigmaRule.from_yaml(rule_yaml)
     print("Rule loaded successfully.")
     
-    # Debug rule structure
-    print(f"Debug: Rule title: {getattr(sigma_rule, 'title', 'N/A')}")
-    print(f"Debug: Rule logsource: {sigma_rule.logsource}")
     
-    # Debug detection structure safely
-    detection = sigma_rule.detection
-    print(f"Debug: Detection type: {type(detection)}")
-    print(f"Debug: Detection attributes: {[attr for attr in dir(detection) if not attr.startswith('_')]}")
     
-    # Try to access detection items safely
-    detection_info = "Could not access detection items"
-    try:
-        if hasattr(detection, 'detection_items'):
-            detection_info = f"detection_items: {detection.detection_items}"
-        elif hasattr(detection, 'detections'):
-            detection_info = f"detections: {detection.detections}"
-        else:
-            # Try to get detection data from object attributes
-            detection_dict = {}
-            for attr in dir(detection):
-                if not attr.startswith('_') and attr not in ['parsed_condition', 'condition']:
-                    try:
-                        val = getattr(detection, attr)
-                        if not callable(val):
-                            detection_dict[attr] = val
-                    except:
-                        pass
-            detection_info = f"detection attributes: {detection_dict}"
-    except Exception as e:
-        detection_info = f"Error accessing detection: {e}"
-    
-    print(f"Debug: {detection_info}")
-    
-    # Debug parsed condition safely
-    try:
-        if hasattr(detection, 'parsed_condition'):
-            parsed = detection.parsed_condition
-            print(f"Debug: parsed_condition type: {type(parsed)}")
-            if isinstance(parsed, list):
-                print(f"Debug: parsed_condition is a list with {len(parsed)} items:")
-                for i, item in enumerate(parsed):
-                    print(f"  [{i}]: {type(item)} - {item}")
-            else:
-                print(f"Debug: parsed_condition: {parsed}")
-        else:
-            print("Debug: No parsed_condition attribute")
-    except Exception as e:
-        print(f"Debug: Error accessing parsed_condition: {e}")
     
     # Convert the rule
     print("Converting rule...")
