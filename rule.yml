@@ -1,22 +1,33 @@
-title: Persistence Via Sudoers Files
-id: ddb26b76-4447-4807-871f-1b035b2bfa5d
+title: Potential DLL Injection Via AccCheckConsole
+id: 0f6da907-5854-4be6-859a-e9958747b0aa
 status: test
-description: Detects creation of sudoers file or files in "sudoers.d" directory which can be used a potential method to persiste privileges for a specific user.
+description: |
+    Detects the execution "AccCheckConsole" a command-line tool for verifying the accessibility implementation of an application's UI.
+    One of the tests that this checker can run are called "verification routine", which tests for things like Consistency, Navigation, etc.
+    The tool allows a user to provide a DLL that can contain a custom "verification routine". An attacker can build such DLLs and pass it via the CLI, which would then be loaded in the context of the "AccCheckConsole" utility.
 references:
-    - https://github.com/h3xduck/TripleCross/blob/1f1c3e0958af8ad9f6ebe10ab442e75de33e91de/apps/deployer.sh
-author: Nasreddine Bencherchali (Nextron Systems)
-date: 2022-07-05
-modified: 2022-12-31
+    - https://gist.github.com/bohops/2444129419c8acf837aedda5f0e7f340
+    - https://twitter.com/bohops/status/1477717351017680899?s=12
+    - https://lolbas-project.github.io/lolbas/OtherMSBinaries/AccCheckConsole/
+author: Florian Roth (Nextron Systems)
+date: 2022-01-06
+modified: 2024-08-29
 tags:
-    - attack.persistence
-    - attack.t1053.003
+    - attack.execution
+    - detection.threat-hunting
 logsource:
-    product: linux
-    category: file_event
+    category: process_creation
+    product: windows
 detection:
-    selection:
-        TargetFilename|startswith: '/etc/sudoers.d/'
-    condition: selection
+    selection_img:
+        - Image|endswith: '\AccCheckConsole.exe'
+        - OriginalFileName: 'AccCheckConsole.exe'
+    selection_cli:
+        CommandLine|contains:
+            - ' -hwnd'
+            - ' -process '
+            - ' -window '
+    condition: all of selection_*
 falsepositives:
-    - Creation of legitimate files in sudoers.d folder part of administrator work
+    - Legitimate use of the UI Accessibility Checker
 level: medium
