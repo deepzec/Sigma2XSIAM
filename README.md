@@ -1,4 +1,4 @@
-![Sigma2XSIAM Logo](logo.png)
+<img src="logo.png" alt="Sigma2XSIAM Logo" width="300">
 
 #  Sigma2XSIAM
 
