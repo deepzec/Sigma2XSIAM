@@ -1,0 +1,4 @@
+# Placeholder pipeline - will be replaced when user uploads the actual pipeline
+name: "cortex_xdm_placeholder"
+priority: 20
+transformations: []
