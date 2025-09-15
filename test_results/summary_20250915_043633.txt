@@ -1,0 +1,215 @@
+Sigma2XSIAM Converter Test Results
+==================================================
+Test Date: 2025-09-15 04:36:33.273446
+Total Rules Tested: 174
+Successful Conversions: 133
+Failed Conversions: 41
+Success Rate: 76.4%
+
+FAILED TEST CASES:
+------------------------------
+File: proc_creation_win_addinutil_suspicious_cmdline.yml
+Title: Suspicious AddinUtil.EXE CommandLine Execution
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_addinutil_uncommon_dir_exec.yml
+Title: AddinUtil.EXE Execution From Uncommon Directory
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_agentexecutor_susp_usage.yml
+Title: Suspicious AgentExecutor PowerShell Execution
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_addinutil_suspicious_cmdline.yml
+Title: Suspicious AddinUtil.EXE CommandLine Execution
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_addinutil_uncommon_dir_exec.yml
+Title: AddinUtil.EXE Execution From Uncommon Directory
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_agentexecutor_susp_usage.yml
+Title: Suspicious AgentExecutor PowerShell Execution
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_appvlp_uncommon_child_process.yml
+Title: Uncommon Child Process Of Appvlp.EXE
+Error: Operator 'and' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_aspnet_compiler_exectuion.yml
+Title: AspNetCompiler Execution
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_aspnet_compiler_susp_child_process.yml
+Title: Suspicious Child Process of AspNetCompiler
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_aspnet_compiler_susp_paths.yml
+Title: Potentially Suspicious ASP.NET Compilation Via AspNetCompiler
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_attrib_hiding_files.yml
+Title: Hiding Files with Attrib.exe
+Error: Operator 'and' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_attrib_system_susp_paths.yml
+Title: Set Suspicious Files as System Files Using Attrib.EXE
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_autorun_registry_modified_via_wmic.yml
+Title: Suspicious Autorun Registry Modified via WMI
+Error: Operator 'and' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_bash_file_execution.yml
+Title: Indirect Command Execution From Script File Via Bash.EXE
+Error: 'NoneType' object has no attribute 'format' (while converting rule None)
+Error Type: AttributeError
+------------------------------
+File: proc_creation_win_bginfo_suspicious_child_process.yml
+Title: Suspicious Child Process Of BgInfo.EXE
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_bitsadmin_download_susp_targetfolder.yml
+Title: File Download Via Bitsadmin To A Suspicious Target Folder
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_bitsadmin_download_uncommon_targetfolder.yml
+Title: File Download Via Bitsadmin To An Uncommon Target Folder
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_calc_uncommon_exec.yml
+Title: Suspicious Calculator Usage
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_certoc_download_direct_ip.yml
+Title: File Download From IP Based URL Via CertOC.EXE
+Error: 'NoneType' object has no attribute 'join' (while converting rule None)
+Error Type: AttributeError
+------------------------------
+File: proc_creation_win_certoc_load_dll_susp_locations.yml
+Title: Suspicious DLL Loaded via CertOC.EXE
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_certutil_encode_susp_location.yml
+Title: File In Suspicious Location Encoded To Base64 Via Certutil.EXE
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_certutil_ntlm_coercion.yml
+Title: Potential NTLM Coercion Via Certutil.EXE
+Error: Operator 'and' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_citrix_trolleyexpress_procdump.yml
+Title: Process Access via TrolleyExpress Exclusion
+Error: 'NoneType' object has no attribute 'format' (while converting rule None)
+Error Type: AttributeError
+------------------------------
+File: proc_creation_win_cloudflared_portable_execution.yml
+Title: Cloudflared Portable Execution
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_curl_download_direct_ip_susp_extensions.yml
+Title: Suspicious File Download From IP Via Curl.EXE
+Error: 'NoneType' object has no attribute 'join' (while converting rule None)
+Error Type: AttributeError
+------------------------------
+File: proc_creation_win_curl_susp_download.yml
+Title: Suspicious Curl.EXE Download
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_driverquery_recon.yml
+Title: Potential Recon Activity Using DriverQuery.EXE
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_dump64_defender_av_bypass_rename.yml
+Title: Potential Windows Defender AV Bypass Via Dump64.EXE Rename
+Error: Operator 'and' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_expand_cabinet_files.yml
+Title: Potentially Suspicious Cabinet File Expansion
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_forfiles_child_process_masquerading.yml
+Title: Forfiles.EXE Child Process Masquerading
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_hh_chm_remote_download_or_execution.yml
+Title: Remote CHM File Download/Execution Via HH.EXE
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_hktl_invoke_obfuscation_stdin.yml
+Title: Invoke-Obfuscation STDIN+ Launcher
+Error: 'NoneType' object has no attribute 'join' (while converting rule None)
+Error Type: AttributeError
+------------------------------
+File: proc_creation_win_link_uncommon_parent_process.yml
+Title: Uncommon Link.EXE Parent Process
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_lolbin_diantz_ads.yml
+Title: Suspicious Diantz Alternate Data Stream Execution
+Error: 'NoneType' object has no attribute 'join' (while converting rule None)
+Error Type: AttributeError
+------------------------------
+File: proc_creation_win_msiexec_embedding.yml
+Title: Suspicious MsiExec Embedding Parent
+Error: Operator 'and' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_mssql_susp_child_process.yml
+Title: Suspicious Child Process Of SQL Server
+Error: Operator 'and' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_powershell_import_cert_susp_locations.yml
+Title: Root Certificate Installed From Susp Locations
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_powershell_token_obfuscation.yml
+Title: Powershell Token Obfuscation - Process Creation
+Error: 'NoneType' object has no attribute 'join' (while converting rule None)
+Error Type: AttributeError
+------------------------------
+File: proc_creation_win_rundll32_mshtml_runhtmlapplication.yml
+Title: Mshtml.DLL RunHTMLApplication Suspicious Usage
+Error: Operator 'and' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_rundll32_no_params.yml
+Title: Rundll32 Execution Without CommandLine Parameters
+Error: Operator 'or' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------
+File: proc_creation_win_rundll32_susp_activity.yml
+Title: Potentially Suspicious Rundll32 Activity
+Error: Operator 'and' not supported by the backend (while converting rule None)
+Error Type: NotImplementedError
+------------------------------

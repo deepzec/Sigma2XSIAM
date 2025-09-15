@@ -1,0 +1,356 @@
+{
+  "timestamp": "20250915_043258",
+  "summary": {
+    "total_tests": 20,
+    "successful_tests": 17,
+    "failed_tests": 3
+  },
+  "results": [
+    {
+      "file": "downloaded_rules/sample/proc_creation_win_7zip_exfil_dmp_files.yml",
+      "filename": "proc_creation_win_7zip_exfil_dmp_files.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter (xdm.event.description = *7-Zip* or xdm.source.process.name = *\\7z.exe or xdm.source.process.name = *\\7zr.exe or xdm.source.process.name = *\\7za.exe or xdm.source.process.executable.filename = 7z.exe or xdm.source.process.executable.filename = 7za.exe) and (xdm.source.process.command_line = *.dmp* or xdm.source.process.command_line = *.dump* or xdm.source.process.command_line = *.hdmp*)",
+      "rule_info": {
+        "title": "7Zip Compressing Dump Files",
+        "level": "medium",
+        "logsource": {
+          "category": "process_creation",
+          "product": "windows"
+        },
+        "author": "Nasreddine Bencherchali (Nextron Systems)"
+      },
+      "execution_time": 0.00834345817565918
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_win_7zip_password_compression.yml",
+      "filename": "proc_creation_win_7zip_password_compression.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter (xdm.event.description = *7-Zip* or xdm.source.process.name = *\\7z.exe or xdm.source.process.name = *\\7zr.exe or xdm.source.process.name = *\\7za.exe or xdm.source.process.executable.filename = 7z.exe or xdm.source.process.executable.filename = 7za.exe) and xdm.source.process.command_line = * -p* and (xdm.source.process.command_line = * a * or xdm.source.process.command_line = * u *)",
+      "rule_info": {
+        "title": "Compress Data and Lock With Password for Exfiltration With 7-ZIP",
+        "level": "medium",
+        "logsource": {
+          "category": "process_creation",
+          "product": "windows"
+        },
+        "author": "frack113"
+      },
+      "execution_time": 0.007024288177490234
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_win_acccheckconsole_execution.yml",
+      "filename": "proc_creation_win_acccheckconsole_execution.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter (xdm.source.process.name = *\\AccCheckConsole.exe or xdm.source.process.executable.filename = AccCheckConsole.exe) and (xdm.source.process.command_line = * -hwnd* or xdm.source.process.command_line = * -process * or xdm.source.process.command_line = * -window *)",
+      "rule_info": {
+        "title": "Potential DLL Injection Via AccCheckConsole",
+        "level": "medium",
+        "logsource": {
+          "category": "process_creation",
+          "product": "windows"
+        },
+        "author": "Florian Roth (Nextron Systems)"
+      },
+      "execution_time": 0.007093667984008789
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_win_addinutil_suspicious_cmdline.yml",
+      "filename": "proc_creation_win_addinutil_suspicious_cmdline.yml",
+      "status": "failed",
+      "error": "Operator 'or' not supported by the backend (while converting rule None)",
+      "query": null,
+      "rule_info": {
+        "title": "Suspicious AddinUtil.EXE CommandLine Execution",
+        "level": "high",
+        "logsource": {
+          "category": "process_creation",
+          "product": "windows"
+        },
+        "author": "Nasreddine Bencherchali (Nextron Systems), Michael McKinley (@McKinleyMike), Tony Latteri (@TheLatteri)"
+      },
+      "execution_time": 0.024887561798095703,
+      "error_type": "NotImplementedError",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1162, in convert_condition_or\n    return joiner.join(\n           ^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1163, in <genexpr>\n    (\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1167, in <genexpr>\n    self.convert_condition(arg, state)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 546, in convert_condition\n    return self.convert_condition_field_eq_val(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 438, in convert_condition_field_eq_val\n    return self.convert_condition_field_eq_val_str(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/cortex/backends/cortexxsiam.py\", line 60, in convert_condition_field_eq_val_str\n    value=self.convert_value_str(cond.value, state)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1328, in convert_value_str\n    converted = s.convert(\n                ^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/types.py\", line 559, in convert\n    s += escape_char\nTypeError: can only concatenate str (not \"NoneType\") to str\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/test_sigma_converter.py\", line 94, in test_single_rule\n    conversion_result = self.backend.convert_rule(sigma_rule)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/cortex/backends/cortexxsiam.py\", line 71, in convert_rule\n    converted = super().convert_rule(rule, output_format)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 203, in convert_rule\n    queries = [\n              ^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 204, in <listcomp>\n    self.convert_condition(cond.parsed, states[index])\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 542, in convert_condition\n    return self.convert_condition_and(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1212, in convert_condition_and\n    return joiner.join(\n           ^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1213, in <genexpr>\n    (\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1219, in <genexpr>\n    else self.convert_condition_group(arg, state)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1145, in convert_condition_group\n    expr = self.convert_condition(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 537, in convert_condition\n    return self.convert_condition_or(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1162, in convert_condition_or\n    return joiner.join(\n           ^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1163, in <genexpr>\n    (\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1167, in <genexpr>\n    self.convert_condition(arg, state)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 542, in convert_condition\n    return self.convert_condition_and(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1212, in convert_condition_and\n    return joiner.join(\n           ^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1213, in <genexpr>\n    (\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1219, in <genexpr>\n    else self.convert_condition_group(arg, state)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1145, in convert_condition_group\n    expr = self.convert_condition(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 537, in convert_condition\n    return self.convert_condition_or(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1177, in convert_condition_or\n    raise NotImplementedError(\"Operator 'or' not supported by the backend\")\nNotImplementedError: Operator 'or' not supported by the backend (while converting rule None)\n"
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_win_addinutil_uncommon_child_process.yml",
+      "filename": "proc_creation_win_addinutil_uncommon_child_process.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter xdr_data.causality_actor_process_image_path = *\\addinutil.exe and not (xdm.source.process.name = *:\\Windows\\System32\\conhost.exe or xdm.source.process.name = *:\\Windows\\System32\\werfault.exe or xdm.source.process.name = *:\\Windows\\SysWOW64\\werfault.exe)",
+      "rule_info": {
+        "title": "Uncommon Child Process Of AddinUtil.EXE",
+        "level": "medium",
+        "logsource": {
+          "category": "process_creation",
+          "product": "windows"
+        },
+        "author": "Michael McKinley (@McKinleyMike), Tony Latteri (@TheLatteri)"
+      },
+      "execution_time": 0.005795478820800781
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_win_addinutil_uncommon_cmdline.yml",
+      "filename": "proc_creation_win_addinutil_uncommon_cmdline.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter (xdm.source.process.name = *\\addinutil.exe or xdm.source.process.executable.filename = AddInUtil.exe) and (xdm.source.process.command_line = *-AddInRoot:* or xdm.source.process.command_line = *-PipelineRoot:*) and not (xdm.source.process.command_line = *-AddInRoot:\"C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\VSTA* or xdm.source.process.command_line = *-AddInRoot:C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\VSTA* or xdm.source.process.command_line = *-PipelineRoot:\"C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\VSTA* or xdm.source.process.command_line = *-PipelineRoot:C:\\Program Files (x86)\\Common Files\\Microsoft Shared\\VSTA*)",
+      "rule_info": {
+        "title": "Uncommon AddinUtil.EXE CommandLine Execution",
+        "level": "medium",
+        "logsource": {
+          "category": "process_creation",
+          "product": "windows"
+        },
+        "author": "Michael McKinley (@McKinleyMike), Tony Latteri (@TheLatteri)"
+      },
+      "execution_time": 0.006295680999755859
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_win_addinutil_uncommon_dir_exec.yml",
+      "filename": "proc_creation_win_addinutil_uncommon_dir_exec.yml",
+      "status": "failed",
+      "error": "Operator 'or' not supported by the backend (while converting rule None)",
+      "query": null,
+      "rule_info": {
+        "title": "AddinUtil.EXE Execution From Uncommon Directory",
+        "level": "medium",
+        "logsource": {
+          "category": "process_creation",
+          "product": "windows"
+        },
+        "author": "Michael McKinley (@McKinleyMike), Tony Latteri (@TheLatteri)"
+      },
+      "execution_time": 0.011091232299804688,
+      "error_type": "NotImplementedError",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1162, in convert_condition_or\n    return joiner.join(\n           ^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1163, in <genexpr>\n    (\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1167, in <genexpr>\n    self.convert_condition(arg, state)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 546, in convert_condition\n    return self.convert_condition_field_eq_val(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 438, in convert_condition_field_eq_val\n    return self.convert_condition_field_eq_val_str(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/cortex/backends/cortexxsiam.py\", line 60, in convert_condition_field_eq_val_str\n    value=self.convert_value_str(cond.value, state)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1328, in convert_value_str\n    converted = s.convert(\n                ^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/types.py\", line 559, in convert\n    s += escape_char\nTypeError: can only concatenate str (not \"NoneType\") to str\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/test_sigma_converter.py\", line 94, in test_single_rule\n    conversion_result = self.backend.convert_rule(sigma_rule)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/cortex/backends/cortexxsiam.py\", line 71, in convert_rule\n    converted = super().convert_rule(rule, output_format)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 203, in convert_rule\n    queries = [\n              ^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 204, in <listcomp>\n    self.convert_condition(cond.parsed, states[index])\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 542, in convert_condition\n    return self.convert_condition_and(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1212, in convert_condition_and\n    return joiner.join(\n           ^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1213, in <genexpr>\n    (\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1217, in <genexpr>\n    self.convert_condition(arg, state)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 544, in convert_condition\n    return self.convert_condition_not(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1237, in convert_condition_not\n    self.not_token + self.token_separator + self.convert_condition_group(arg, state)\n                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1145, in convert_condition_group\n    expr = self.convert_condition(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 537, in convert_condition\n    return self.convert_condition_or(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1177, in convert_condition_or\n    raise NotImplementedError(\"Operator 'or' not supported by the backend\")\nNotImplementedError: Operator 'or' not supported by the backend (while converting rule None)\n"
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_win_adplus_memory_dump.yml",
+      "filename": "proc_creation_win_adplus_memory_dump.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter (xdm.source.process.name = *\\adplus.exe or xdm.source.process.executable.filename = Adplus.exe) and (xdm.source.process.command_line = * -hang * or xdm.source.process.command_line = * -pn * or xdm.source.process.command_line = * -pmn * or xdm.source.process.command_line = * -p * or xdm.source.process.command_line = * -po * or xdm.source.process.command_line = * -c * or xdm.source.process.command_line = * -sc *)",
+      "rule_info": {
+        "title": "Potential Adplus.EXE Abuse",
+        "level": "high",
+        "logsource": {
+          "category": "process_creation",
+          "product": "windows"
+        },
+        "author": "Nasreddine Bencherchali (Nextron Systems)"
+      },
+      "execution_time": 0.006333589553833008
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_win_agentexecutor_potential_abuse.yml",
+      "filename": "proc_creation_win_agentexecutor_potential_abuse.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter (xdm.source.process.name = \\AgentExecutor.exe or xdm.source.process.executable.filename = AgentExecutor.exe) and (xdm.source.process.command_line = * -powershell* or xdm.source.process.command_line = * -remediationScript*) and not xdr_data.causality_actor_process_image_path = *\\Microsoft.Management.Services.IntuneWindowsAgent.exe",
+      "rule_info": {
+        "title": "AgentExecutor PowerShell Execution",
+        "level": "medium",
+        "logsource": {
+          "category": "process_creation",
+          "product": "windows"
+        },
+        "author": "Nasreddine Bencherchali (Nextron Systems), memory-shards"
+      },
+      "execution_time": 0.00814962387084961
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_win_agentexecutor_susp_usage.yml",
+      "filename": "proc_creation_win_agentexecutor_susp_usage.yml",
+      "status": "failed",
+      "error": "Operator 'or' not supported by the backend (while converting rule None)",
+      "query": null,
+      "rule_info": {
+        "title": "Suspicious AgentExecutor PowerShell Execution",
+        "level": "high",
+        "logsource": {
+          "category": "process_creation",
+          "product": "windows"
+        },
+        "author": "Nasreddine Bencherchali (Nextron Systems), memory-shards"
+      },
+      "execution_time": 0.013189554214477539,
+      "error_type": "NotImplementedError",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1162, in convert_condition_or\n    return joiner.join(\n           ^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1163, in <genexpr>\n    (\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1167, in <genexpr>\n    self.convert_condition(arg, state)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 546, in convert_condition\n    return self.convert_condition_field_eq_val(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 438, in convert_condition_field_eq_val\n    return self.convert_condition_field_eq_val_str(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/cortex/backends/cortexxsiam.py\", line 60, in convert_condition_field_eq_val_str\n    value=self.convert_value_str(cond.value, state)\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1328, in convert_value_str\n    converted = s.convert(\n                ^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/types.py\", line 559, in convert\n    s += escape_char\nTypeError: can only concatenate str (not \"NoneType\") to str\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"/home/runner/workspace/test_sigma_converter.py\", line 94, in test_single_rule\n    conversion_result = self.backend.convert_rule(sigma_rule)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/cortex/backends/cortexxsiam.py\", line 71, in convert_rule\n    converted = super().convert_rule(rule, output_format)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 203, in convert_rule\n    queries = [\n              ^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 204, in <listcomp>\n    self.convert_condition(cond.parsed, states[index])\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 542, in convert_condition\n    return self.convert_condition_and(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1212, in convert_condition_and\n    return joiner.join(\n           ^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1213, in <genexpr>\n    (\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1217, in <genexpr>\n    self.convert_condition(arg, state)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 544, in convert_condition\n    return self.convert_condition_not(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1237, in convert_condition_not\n    self.not_token + self.token_separator + self.convert_condition_group(arg, state)\n                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1145, in convert_condition_group\n    expr = self.convert_condition(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 537, in convert_condition\n    return self.convert_condition_or(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1162, in convert_condition_or\n    return joiner.join(\n           ^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1163, in <genexpr>\n    (\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1167, in <genexpr>\n    self.convert_condition(arg, state)\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 537, in convert_condition\n    return self.convert_condition_or(cond, state)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/workspace/.pythonlibs/lib/python3.11/site-packages/sigma/conversion/base.py\", line 1177, in convert_condition_or\n    raise NotImplementedError(\"Operator 'or' not supported by the backend\")\nNotImplementedError: Operator 'or' not supported by the backend (while converting rule None)\n"
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_lnx_apt_shell_execution.yml",
+      "filename": "proc_creation_lnx_apt_shell_execution.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter (xdm.source.process.name = */apt or xdm.source.process.name = */apt-get) and xdm.source.process.command_line = *APT::Update::Pre-Invoke::=*",
+      "rule_info": {
+        "title": "Shell Invocation via Apt - Linux",
+        "level": "medium",
+        "logsource": {
+          "category": "process_creation",
+          "product": "linux"
+        },
+        "author": "Nasreddine Bencherchali (Nextron Systems)"
+      },
+      "execution_time": 0.0043756961822509766
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_lnx_at_command.yml",
+      "filename": "proc_creation_lnx_at_command.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter xdm.source.process.name = */at or xdm.source.process.name = */atd",
+      "rule_info": {
+        "title": "Scheduled Task/Job At",
+        "level": "low",
+        "logsource": {
+          "product": "linux",
+          "category": "process_creation"
+        },
+        "author": "\u00d6mer G\u00fcnal, oscd.community"
+      },
+      "execution_time": 0.004483938217163086
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_lnx_awk_shell_spawn.yml",
+      "filename": "proc_creation_lnx_awk_shell_spawn.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter (xdm.source.process.name = */awk or xdm.source.process.name = */gawk or xdm.source.process.name = */mawk or xdm.source.process.name = */nawk) and xdm.source.process.command_line = *BEGIN {system* and (xdm.source.process.command_line = */bin/bash* or xdm.source.process.command_line = */bin/dash* or xdm.source.process.command_line = */bin/fish* or xdm.source.process.command_line = */bin/sh* or xdm.source.process.command_line = */bin/zsh*)",
+      "rule_info": {
+        "title": "Suspicious Invocation of Shell via AWK - Linux",
+        "level": "high",
+        "logsource": {
+          "category": "process_creation",
+          "product": "linux"
+        },
+        "author": "Li Ling, Andy Parkidomo, Robert Rakowski, Blake Hartstein (Bloomberg L.P.)"
+      },
+      "execution_time": 0.005917549133300781
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_lnx_base64_decode.yml",
+      "filename": "proc_creation_lnx_base64_decode.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter xdm.source.process.name = */base64 and xdm.source.process.command_line = *-d*",
+      "rule_info": {
+        "title": "Decode Base64 Encoded Text",
+        "level": "low",
+        "logsource": {
+          "category": "process_creation",
+          "product": "linux"
+        },
+        "author": "Daniil Yugoslavskiy, oscd.community"
+      },
+      "execution_time": 0.004892587661743164
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_lnx_base64_execution.yml",
+      "filename": "proc_creation_lnx_base64_execution.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter xdm.source.process.command_line = *base64 * and (xdm.source.process.command_line = *| bash * or xdm.source.process.command_line = *| sh * or xdm.source.process.command_line = *|bash * or xdm.source.process.command_line = *|sh * or xdm.source.process.command_line = * |sh or xdm.source.process.command_line = *| bash or xdm.source.process.command_line = *| sh or xdm.source.process.command_line = *|bash)",
+      "rule_info": {
+        "title": "Linux Base64 Encoded Pipe to Shell",
+        "level": "medium",
+        "logsource": {
+          "product": "linux",
+          "category": "process_creation"
+        },
+        "author": "pH-T (Nextron Systems)"
+      },
+      "execution_time": 0.006152153015136719
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_lnx_base64_shebang_cli.yml",
+      "filename": "proc_creation_lnx_base64_shebang_cli.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter xdm.source.process.command_line = *IyEvYmluL2Jhc2* or xdm.source.process.command_line = *IyEvYmluL2Rhc2* or xdm.source.process.command_line = *IyEvYmluL3pza* or xdm.source.process.command_line = *IyEvYmluL2Zpc2* or xdm.source.process.command_line = *IyEvYmluL3No*",
+      "rule_info": {
+        "title": "Linux Base64 Encoded Shebang In CLI",
+        "level": "medium",
+        "logsource": {
+          "product": "linux",
+          "category": "process_creation"
+        },
+        "author": "Nasreddine Bencherchali (Nextron Systems)"
+      },
+      "execution_time": 0.00537562370300293
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_lnx_bash_interactive_shell.yml",
+      "filename": "proc_creation_lnx_bash_interactive_shell.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter xdm.source.process.name = */bash and xdm.source.process.command_line = * -i *",
+      "rule_info": {
+        "title": "Bash Interactive Shell",
+        "level": "low",
+        "logsource": {
+          "category": "process_creation",
+          "product": "linux"
+        },
+        "author": "@d4ns4n_"
+      },
+      "execution_time": 0.005934238433837891
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_lnx_bpf_kprob_tracing_enabled.yml",
+      "filename": "proc_creation_lnx_bpf_kprob_tracing_enabled.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter xdm.source.process.command_line = *echo 1 >* and xdm.source.process.command_line = */sys/kernel/debug/tracing/events/kprobes/* and (xdm.source.process.command_line = */myprobe/enable* or xdm.source.process.command_line = */myretprobe/enable*)",
+      "rule_info": {
+        "title": "Enable BPF Kprobes Tracing",
+        "level": "medium",
+        "logsource": {
+          "category": "process_creation",
+          "product": "linux"
+        },
+        "author": "Nasreddine Bencherchali (Nextron Systems)"
+      },
+      "execution_time": 0.007128238677978516
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_lnx_bpftrace_unsafe_option_usage.yml",
+      "filename": "proc_creation_lnx_bpftrace_unsafe_option_usage.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter xdm.source.process.name = *bpftrace and xdm.source.process.command_line = *--unsafe*",
+      "rule_info": {
+        "title": "BPFtrace Unsafe Option Usage",
+        "level": "medium",
+        "logsource": {
+          "category": "process_creation",
+          "product": "linux"
+        },
+        "author": "Andreas Hunkeler (@Karneades)"
+      },
+      "execution_time": 0.0038962364196777344
+    },
+    {
+      "file": "downloaded_rules/sample/proc_creation_lnx_capa_discovery.yml",
+      "filename": "proc_creation_lnx_capa_discovery.yml",
+      "status": "success",
+      "error": null,
+      "query": "datamodel dataset = * | filter xdm.source.process.name = */getcap and (xdm.source.process.command_line = * -r * or xdm.source.process.command_line = * /r * or xdm.source.process.command_line = * \u2013r * or xdm.source.process.command_line = * \u2014r * or xdm.source.process.command_line = * \u2015r *)",
+      "rule_info": {
+        "title": "Capabilities Discovery - Linux",
+        "level": "low",
+        "logsource": {
+          "category": "process_creation",
+          "product": "linux"
+        },
+        "author": "Nasreddine Bencherchali (Nextron Systems)"
+      },
+      "execution_time": 0.0046901702880859375
+    }
+  ]
+}
