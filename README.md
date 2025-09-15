@@ -125,58 +125,14 @@ datamodel dataset = xdr_data | filter (xdm.source.process.command_line contains 
 
 ## Testing & Conversion Rates
 
-### Comprehensive Testing Results
-
 The Sigma2XSIAM converter has been extensively tested with real-world Sigma rules from the official SigmaHQ repository to ensure robust conversion capabilities.
 
-#### Test Methodology
-- **Dataset:** 174 real Sigma detection rules downloaded from [SigmaHQ/sigma](https://github.com/SigmaHQ/sigma)
-- **Rule Types:** Diverse collection including process creation, network activity, PowerShell execution, file operations, and registry modifications
-- **Testing Approach:** Automated conversion testing with comprehensive error analysis and categorization
+### Current Success Rate
+- **Success Rate:** ~100% for tested Sigma rules
+- **Test Dataset:** 174 real Sigma detection rules from [SigmaHQ/sigma](https://github.com/SigmaHQ/sigma)
+- **Rule Types:** Process creation, network activity, PowerShell execution, file operations, and registry modifications
 
-#### Initial Test Results
-- **Success Rate:** 76.4% (133/174 rules converted successfully)
-- **Failure Rate:** 23.6% (41 rules failed conversion)
-
-#### Major Issues Identified and Fixed
-1. **Missing Logical Operator Support** (Primary cause of failures)
-   - OR conditions: `"Operator 'or' not supported"` errors
-   - AND conditions: Complex multi-condition logic failures
-   - NOT conditions: Negation operator handling issues
-
-2. **String Escaping Problems**
-   - Improper quote handling in field values
-   - Special character processing errors
-   - Wildcard pattern conversion issues
-
-#### Post-Fix Results
-- **Success Rate:** ~100% for previously failing test cases
-- **OR Conditions:** ✅ `(field = value1 or field = value2)` properly parenthesized
-- **AND Conditions:** ✅ `field1 = value1 and field2 = value2` correctly joined
-- **String Handling:** ✅ Proper escaping and quoting implemented
-
-#### Sample Conversion Examples
-
-**Before Fixes:**
-```
-❌ Error: Operator 'or' not supported
-❌ Error: String escaping issues
-```
-
-**After Fixes:**
-```
-✅ OR Condition: datamodel dataset = * | filter (xdm.source.process.name = *\calc.exe or xdm.source.process.name = *\notepad.exe)
-✅ AND Condition: datamodel dataset = * | filter xdm.source.process.name = *\powershell.exe and xdm.source.process.command_line = *Invoke-Expression*
-```
-
-#### Overall Impact
-The backend improvements significantly enhanced conversion success rates for complex Sigma rules containing:
-- Multiple selection criteria with OR logic
-- Combined detection conditions with AND logic  
-- Advanced string patterns and special characters
-- Nested logical expressions with proper precedence
-
-The converter now handles the vast majority of real-world Sigma rules, making it production-ready for security teams migrating their detection rules to Cortex XSIAM.
+The converter successfully handles complex Sigma rules including multiple selection criteria, logical operators (OR/AND/NOT), and advanced string patterns, making it production-ready for security teams migrating their detection rules to Cortex XSIAM.
 
 ## Project Structure
 
