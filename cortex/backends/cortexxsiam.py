@@ -72,6 +72,6 @@ class CortexXSIAMBackend(TextQueryBackend):
 
         final_queries = []
         for query in converted:
-            final_queries.append(f"datamodel dataset = xdr_data | filter {query}")
+            final_queries.append(f"datamodel dataset = * | filter {query}")
 
         return final_queries
