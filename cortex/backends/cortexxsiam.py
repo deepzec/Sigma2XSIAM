@@ -29,7 +29,7 @@ class CortexXSIAMBackend(TextQueryBackend):
 
     eq_expression = "{field} {token} {value}"
 
-    string_quoting = ('"', '"')
+    string_quoting = ('"', '"', '\\')
     field_quote_pattern = re.compile(r"^[\w.]+$")
     field_quote = None
 
@@ -65,6 +65,28 @@ class CortexXSIAMBackend(TextQueryBackend):
             token=self.eq_token,
             value=self.convert_value_str(cond.value, state)
         )
+
+    def convert_condition_or(self, cond, state: ConversionState) -> str:
+        """Convert OR conditions to XQL."""
+        args = [self.convert_condition(arg, state) for arg in cond.args]
+        result = f" {self.or_token} ".join(args)
+        if self.parenthesize_or and len(args) > 1:
+            result = self.group_expression.format(expr=result)
+        return result
+
+    def convert_condition_and(self, cond, state: ConversionState) -> str:
+        """Convert AND conditions to XQL."""
+        args = [self.convert_condition(arg, state) for arg in cond.args]
+        result = f" {self.and_token} ".join(args)
+        return result
+
+    def convert_condition_not(self, cond, state: ConversionState) -> str:
+        """Convert NOT conditions to XQL."""
+        arg = self.convert_condition(cond.args[0], state)
+        # Always parenthesize NOT argument to ensure correct precedence
+        if not (arg.startswith('(') and arg.endswith(')')):
+            arg = self.group_expression.format(expr=arg)
+        return f"{self.not_token} {arg}"
 
     def convert_rule(self, rule: SigmaRule, output_format: str = "default"):
         """Convert a Sigma rule into a Cortex XSIAM XQL query."""
