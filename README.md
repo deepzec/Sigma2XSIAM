@@ -1,3 +1,5 @@
+![Sigma2XSIAM Logo](logo.png)
+
 #  Sigma2XSIAM
 
 This repository contains a custom **pySigma backend** specifically designed to convert Sigma rules into functional and accurate **Cortex XSIAM XQL queries**.
@@ -140,3 +142,16 @@ The converter successfully handles complex Sigma rules including multiple select
 * `pipelines/cortex_xdm.yml`: The YAML processing pipeline that handles all field mappings. **This is the main file to edit to add or change field translations.**
 * `pyproject.toml`: The project definition file.
 * `requirements.txt`: A list of all Python dependencies.
+
+## Bug Reports & Issues
+
+If you encounter any issues, conversion errors, or have suggestions for improvements, please report them by:
+
+1. **Creating an Issue**: Open a new issue in this repository with detailed information about the problem
+2. **Include Details**: Please provide:
+   - The Sigma rule that failed to convert (if applicable)
+   - Error messages or unexpected output
+   - Your environment details (Python version, pySigma version)
+   - Expected vs. actual behavior
+
+Your feedback helps improve the converter for the entire security community!
