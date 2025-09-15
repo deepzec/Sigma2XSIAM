@@ -24,3 +24,7 @@ args = "python convert_rule.py"
 
 [workflows.workflow.metadata]
 outputType = "console"
+
+[nix]
+channel = "stable-25_05"
+packages = ["libyaml"]
