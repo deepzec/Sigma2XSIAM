@@ -1,0 +1,34 @@
+# File: pyproject.toml
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pysigma-backend-cortexxsiam"
+version = "0.1.0"
+authors = [
+  { name="Your Name", email="dtv@paloaltonetworks.com" }, # <-- Update with your details
+]
+description = "A pySigma backend for converting Sigma rules to Cortex XSIAM queries."
+readme = "README.md"
+requires-python = ">=3.8"
+license = { text = "MIT License" }
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "pysigma",
+]
+
+[project.scripts]
+sigma = "sigma.cli.main:main"
+
+[project.entry-points."cortex.backends"]
+cortexxsiam = "cortex.backends.cortexxsiam:CortexXSIAMBackend"
+
+# The incorrect pipeline entry point that was here has been removed.
+
+[tool.setuptools]
+packages = ["cortex"]

@@ -1,0 +1,39 @@
+# File: convert_rule.py
+import os
+from sigma.rule import SigmaRule
+from sigma.processing.pipeline import ProcessingPipeline
+from sigma.backends.cortexxsiam import CortexXSIAMBackend
+
+print("--- Starting Sigma to XSIAM Conversion ---")
+
+pipeline_path = "pipelines/cortex_xdm.yml"
+rule_path = "rule.yml"
+
+try:
+    # Load the processing pipeline from your YAML file.
+    print(f"Loading YAML pipeline: {pipeline_path}...")
+    with open(pipeline_path, "r") as f:
+        pipeline_yaml = f.read()
+    pipeline = ProcessingPipeline.from_yaml(pipeline_yaml)
+    print("Pipeline object created successfully.")
+
+    # Initialize your custom backend WITH the pipeline.
+    siem_backend = CortexXSIAMBackend(processing_pipeline=pipeline)
+    print("Backend initialized.")
+
+    # Load the Sigma rule
+    print(f"Loading Sigma rule: {rule_path}...")
+    with open(rule_path, "r") as f:
+        sigma_rule = SigmaRule.from_yaml(f.read())
+
+    # Convert the rule and print the result
+    print("Converting rule...")
+    xql_query = siem_backend.convert_rule(sigma_rule)[0]
+
+    print("\n✅--- CONVERSION SUCCESSFUL ---✅")
+    print("Generated XSIAM Query:")
+    print(xql_query)
+
+except Exception as e:
+    print(f"\n❌--- CONVERSION FAILED ---❌")
+    print(f"An error occurred: {e}")
