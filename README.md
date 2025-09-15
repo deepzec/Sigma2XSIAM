@@ -119,6 +119,10 @@ Generated XSIAM Query:
 datamodel dataset = xdr_data | filter (xdm.source.process.command_line contains "Function Get-ADRExcelComOb" and xdm.source.process.command_line contains "Get-ADRGPO" and xdm.source.process.command_line contains "Get-ADRDomainController")
 ```
 
+## Important Note
+
+**Dataset Configuration:** The default converter returns `dataset = *` in the generated XQL queries. For optimal query response performance, please modify this to your actual dataset name (e.g., `dataset = xdr_data`, `dataset = endpoint_data`, etc.) based on your specific XSIAM environment and data sources.
+
 ## Project Structure
 
 * `sigma/backends/cortexxsiam.py`: The core Python code for the backend translator.
