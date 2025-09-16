@@ -155,3 +155,8 @@ If you encounter any issues, conversion errors, or have suggestions for improvem
    - Expected vs. actual behavior
 
 Your feedback helps improve the converter for the entire security community!
+
+## Credits
+Tuan Anh Nguyen - For the initial idea and work 
+  
+
