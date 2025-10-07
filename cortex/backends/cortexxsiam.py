@@ -67,16 +67,21 @@ class CortexXSIAMBackend(TextQueryBackend):
         return f'{self.escape_and_quote_field(cond.field)} = "*{value}"'
 
     def convert_condition_field_eq_val_str(self, cond, state: ConversionState) -> str:
+        value = self.convert_value_str(cond.value, state)
+        # Ensure value is always quoted
+        if not (value.startswith('"') and value.endswith('"')):
+            value = f'"{value}"'
+        
         if cond.value.contains_special():
             return self.wildcard_match.format(
                 field=self.escape_and_quote_field(cond.field), 
-                value=self.convert_value_str(cond.value, state)
+                value=value
             )
 
         return self.eq_expression.format(
             field=self.escape_and_quote_field(cond.field),
             token=self.eq_token,
-            value=self.convert_value_str(cond.value, state)
+            value=value
         )
 
     def convert_condition_or(self, cond, state: ConversionState) -> str:
