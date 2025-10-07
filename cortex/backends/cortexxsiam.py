@@ -28,11 +28,20 @@ class CortexXSIAMBackend(TextQueryBackend):
     eq_token = "="
 
     eq_expression = "{field} {token} {value}"
+    field_equals_field_expression = "{field1} = {field2}"
+    unbound_value_str_expression = "xdm.event.description contains {value}"
+    unbound_value_num_expression = "xdm.event.id = {value}"
+    unbound_value_re_expression = "xdm.event.description ~= \"{value}\""
+    
+    # For lists of unbound values (keywords)
+    convert_or_as_in = False  # Don't convert OR to IN clause
 
     string_quote = '"'
     string_quote_escape = '\\'
     string_quoting = ('"', '"', '\\')
     escape_char = '\\'
+    re_escape_char = '\\'
+    re_escape_escape_char = ' '
     
     field_quote_pattern = re.compile(r"^[\w.]+$")
     field_quote = None
@@ -92,7 +101,7 @@ class CortexXSIAMBackend(TextQueryBackend):
             arg = self.group_expression.format(expr=arg)
         return f"{self.not_token} {arg}"
 
-    def convert_rule(self, rule: SigmaRule, output_format: str = "default"):
+    def convert_rule(self, rule: SigmaRule, output_format: str = "default") -> list:
         """Convert a Sigma rule into a Cortex XSIAM XQL query."""
         converted = super().convert_rule(rule, output_format)
 

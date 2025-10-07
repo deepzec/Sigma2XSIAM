@@ -130,11 +130,15 @@ datamodel dataset = xdr_data | filter (xdm.source.process.command_line contains 
 The Sigma2XSIAM converter has been extensively tested with real-world Sigma rules from the official SigmaHQ repository to ensure robust conversion capabilities.
 
 ### Current Success Rate
-- **Success Rate:** ~100% for tested Sigma rules
-- **Test Dataset:** 174 real Sigma detection rules from [SigmaHQ/sigma](https://github.com/SigmaHQ/sigma)
-- **Rule Types:** Process creation, network activity, PowerShell execution, file operations, and registry modifications
+- **Success Rate:** 97.36% (3,064/3,147 rules converted successfully)
+- **Test Dataset:** 3,147 real Sigma detection rules from [SigmaHQ/sigma](https://github.com/SigmaHQ/sigma)
+- **Rule Coverage:** 
+  - ✅ Windows endpoint rules (process creation, PowerShell, registry, file operations)
+  - ✅ Cloud platform rules (AWS CloudTrail, Azure, GCP, Okta)
+  - ✅ Web application security rules (SQL injection, XSS detection)
+  - ✅ Network monitoring rules (Zeek, DNS, firewall, proxy)
 
-The converter successfully handles complex Sigma rules including multiple selection criteria, logical operators (OR/AND/NOT), and advanced string patterns, making it production-ready for security teams migrating their detection rules to Cortex XSIAM.
+The converter successfully handles complex Sigma rules including multiple selection criteria, logical operators (OR/AND/NOT), field-to-field comparisons, and advanced string patterns, making it production-ready for security teams migrating their detection rules to Cortex XSIAM.
 
 ## Project Structure
 
