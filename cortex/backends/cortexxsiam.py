@@ -29,7 +29,11 @@ class CortexXSIAMBackend(TextQueryBackend):
 
     eq_expression = "{field} {token} {value}"
 
+    string_quote = '"'
+    string_quote_escape = '\\'
     string_quoting = ('"', '"', '\\')
+    escape_char = '\\'
+    
     field_quote_pattern = re.compile(r"^[\w.]+$")
     field_quote = None
 

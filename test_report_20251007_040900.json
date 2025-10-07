@@ -1,13 +1,12 @@
 {
-  "timestamp": "2025-10-07T04:06:17.060787",
+  "timestamp": "2025-10-07T04:09:00.595443",
   "total_rules": 3147,
-  "success_count": 2288,
-  "failed_count": 859,
-  "success_rate": 72.7041626946298,
+  "success_count": 2878,
+  "failed_count": 269,
+  "success_rate": 91.45217667619956,
   "error_categories": {
-    "AttributeError": 214,
-    "TypeError": 620,
-    "SigmaValueError": 24,
+    "AttributeError": 242,
+    "SigmaValueError": 26,
     "NotImplementedError": 1
   },
   "failed_rules": [
@@ -181,50 +180,14 @@
     },
     {
       "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/network/zeek/zeek_smb_converted_win_susp_psexec.yml"
-    },
-    {
-      "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
+      "error": "'NoneType' object has no attribute 'format' (while converting rule None)",
+      "error_type": "AttributeError",
       "rule_path": "attached_assets/sigma_rules/rules/network/zeek/zeek_smb_converted_win_lm_namedpipe.yml"
     },
     {
       "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/network/zeek/zeek_smb_converted_win_impacket_secretdump.yml"
-    },
-    {
-      "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/network/zeek/zeek_smb_converted_win_atsvc_task.yml"
-    },
-    {
-      "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/windows/process_access/proc_access_win_hktl_sysmonente.yml"
-    },
-    {
-      "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/windows/process_access/proc_access_win_uac_bypass_wow64_logger.yml"
-    },
-    {
-      "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/windows/process_access/proc_access_win_susp_direct_ntopenprocess_call.yml"
-    },
-    {
-      "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
+      "error": "Single-character wildcard not specified for conversion",
+      "error_type": "SigmaValueError",
       "rule_path": "attached_assets/sigma_rules/rules/windows/process_access/proc_access_win_lsass_susp_access_flag.yml"
     },
     {
@@ -235,81 +198,117 @@
     },
     {
       "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/windows/process_access/proc_access_win_svchost_susp_access_request.yml"
-    },
-    {
-      "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/windows/process_access/proc_access_win_lsass_memdump.yml"
-    },
-    {
-      "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/windows/file/file_delete/file_delete_win_delete_prefetch.yml"
-    },
-    {
-      "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/windows/file/file_delete/file_delete_win_delete_event_log_files.yml"
-    },
-    {
-      "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/windows/file/file_delete/file_delete_win_delete_exchange_powershell_logs.yml"
-    },
-    {
-      "status": "failed",
       "error": "'NoneType' object has no attribute 'format' (while converting rule None)",
       "error_type": "AttributeError",
       "rule_path": "attached_assets/sigma_rules/rules/windows/file/file_delete/file_delete_win_delete_own_image.yml"
     },
     {
       "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/windows/file/file_delete/file_delete_win_delete_tomcat_logs.yml"
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/file/file_event/file_event_win_wmiexec_default_filename.yml"
     },
     {
       "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/windows/file/file_delete/file_delete_win_cve_2021_1675_print_nightmare.yml"
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/file/file_event/file_event_win_hktl_crackmapexec_indicators.yml"
     },
     {
       "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/windows/file/file_delete/file_delete_win_delete_iis_access_logs.yml"
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/file/file_event/file_event_win_impacket_file_indicators.yml"
     },
     {
       "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/windows/file/file_rename/file_rename_win_ransomware.yml"
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/file/file_event/file_event_win_hktl_remote_cred_dump.yml"
     },
     {
       "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/windows/file/file_change/file_change_win_2022_timestomping.yml"
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/powershell/powershell_classic/posh_pc_wsman_com_provider_no_powershell.yml"
     },
     {
       "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/windows/file/file_access/file_access_win_susp_gpo_files.yml"
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/powershell/powershell_script/posh_ps_invoke_obfuscation_obfuscated_iex.yml"
     },
     {
       "status": "failed",
-      "error": "can only concatenate str (not \"NoneType\") to str (while converting rule None)",
-      "error_type": "TypeError",
-      "rule_path": "attached_assets/sigma_rules/rules/windows/file/file_access/file_access_win_susp_crypto_currency_wallets.yml"
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/powershell/powershell_script/posh_ps_invoke_obfuscation_via_stdin.yml"
+    },
+    {
+      "status": "failed",
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/powershell/powershell_script/posh_ps_invoke_obfuscation_via_var.yml"
+    },
+    {
+      "status": "failed",
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/powershell/powershell_script/posh_ps_invoke_obfuscation_var.yml"
+    },
+    {
+      "status": "failed",
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/powershell/powershell_script/posh_ps_invoke_obfuscation_stdin.yml"
+    },
+    {
+      "status": "failed",
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/powershell/powershell_script/posh_ps_copy_item_system_directory.yml"
+    },
+    {
+      "status": "failed",
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/powershell/powershell_script/posh_ps_invoke_obfuscation_via_use_clip.yml"
+    },
+    {
+      "status": "failed",
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/powershell/powershell_script/posh_ps_token_obfuscation.yml"
+    },
+    {
+      "status": "failed",
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/powershell/powershell_script/posh_ps_invoke_obfuscation_clip.yml"
+    },
+    {
+      "status": "failed",
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/powershell/powershell_module/posh_pm_invoke_obfuscation_via_stdin.yml"
+    },
+    {
+      "status": "failed",
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/powershell/powershell_module/posh_pm_invoke_obfuscation_stdin.yml"
+    },
+    {
+      "status": "failed",
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/powershell/powershell_module/posh_pm_invoke_obfuscation_via_use_clip.yml"
+    },
+    {
+      "status": "failed",
+      "error": "'NoneType' object has no attribute 'join' (while converting rule None)",
+      "error_type": "AttributeError",
+      "rule_path": "attached_assets/sigma_rules/rules/windows/powershell/powershell_module/posh_pm_invoke_obfuscation_via_var.yml"
     }
   ]
 }
