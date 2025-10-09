@@ -185,9 +185,9 @@ Total rules processed: 250
 
 The Sigma2XSIAM converter has been extensively tested with real-world Sigma rules from the official SigmaHQ repository to ensure robust conversion capabilities.
 
-### Current Success Rate
-- **Success Rate:** 97.36% (3,064/3,147 rules converted successfully)
-- **Test Dataset:** 3,147 real Sigma detection rules from [SigmaHQ/sigma](https://github.com/SigmaHQ/sigma)
+### Conversion Summary
+- Success Rate: 97.36% (3,064/3,147 rules converted successfully)
+- Test Dataset: 3,147 real Sigma detection rules from SigmaHQ/sigma
 - **Rule Coverage:** 
   - ✅ Windows endpoint rules (process creation, PowerShell, registry, file operations)
   - ✅ Cloud platform rules (AWS CloudTrail, Azure, GCP, Okta)
