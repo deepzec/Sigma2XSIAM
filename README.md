@@ -102,8 +102,24 @@ Use a simple Python script to load your custom pipeline, the backend, and a Sigm
 
 3.  **Run the script:**
     ```bash
+    # Basic usage (displays query in console)
     python convert_rule.py
+    
+    # Save query to output file
+    python convert_rule.py -o output.xql
+    
+    # Specify custom rule file and output
+    python convert_rule.py -r custom_rule.yml -o query_output.xql
+    
+    # View all available options
+    python convert_rule.py --help
     ```
+
+### Command-Line Options
+
+- `-o OUTPUT, --output OUTPUT` - Output file path to write the XQL query
+- `-r RULE, --rule RULE` - Input Sigma rule file (default: rule.yml)
+- `-h, --help` - Show help message and exit
 
 ### Example Output
 

@@ -1,5 +1,6 @@
 import sys
 import os
+import argparse
 
 # Add the project directory to Python path to find the custom backend
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -22,12 +23,18 @@ from sigma.processing.resolver import ProcessingPipelineResolver
 import yaml
 import os
 
+# Parse command-line arguments
+parser = argparse.ArgumentParser(description='Convert Sigma rules to Cortex XSIAM XQL queries')
+parser.add_argument('-o', '--output', type=str, help='Output file path to write the XQL query')
+parser.add_argument('-r', '--rule', type=str, default='rule.yml', help='Input Sigma rule file (default: rule.yml)')
+args = parser.parse_args()
+
 print("--- Starting Sigma to XSIAM Conversion ---")
 
 try:
     # Check if files exist
     pipeline_file = "pipelines/cortex_xdm.yml"
-    rule_file = "rule.yml"
+    rule_file = args.rule
     
     if not os.path.exists(pipeline_file):
         print(f"❌ Pipeline file not found: {pipeline_file}")
@@ -82,6 +89,15 @@ try:
     print("\n✅--- CONVERSION SUCCESSFUL ---✅")
     print("Generated XSIAM Query:")
     print(xql_query)
+    
+    # Write to output file if specified
+    if args.output:
+        try:
+            with open(args.output, 'w', encoding='utf-8') as f:
+                f.write(xql_query)
+            print(f"\n✅ Query saved to: {args.output}")
+        except Exception as e:
+            print(f"\n⚠️  Warning: Could not write to output file: {e}")
     
 except ImportError as e:
     print(f"\n❌--- IMPORT ERROR ---❌")
