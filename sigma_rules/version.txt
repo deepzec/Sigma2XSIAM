@@ -1,3 +1,0 @@
-Release Date: 2025-10-01
-Label: r2025-07-08-71-gd27d12040
-Commit-Hash: d27d120401dba7168da4cd49a153e8146437b540
