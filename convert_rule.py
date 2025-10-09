@@ -66,7 +66,10 @@ def convert_single_rule(siem_backend, rule_file, output_file=None):
         # Write to output file if specified
         if output_file:
             try:
-                os.makedirs(os.path.dirname(output_file), exist_ok=True)
+                # Create directory only if there's a directory path
+                dir_path = os.path.dirname(output_file)
+                if dir_path:
+                    os.makedirs(dir_path, exist_ok=True)
                 with open(output_file, 'w', encoding='utf-8') as f:
                     f.write(xql_query)
             except Exception as e:
