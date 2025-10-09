@@ -102,14 +102,17 @@ Use a simple Python script to load your custom pipeline, the backend, and a Sigm
 
 3.  **Run the script:**
     ```bash
-    # Basic usage (displays query in console)
+    # Basic usage - convert rule.yml (displays query in console)
     python convert_rule.py
     
-    # Save query to output file
-    python convert_rule.py -o output.xql
+    # Convert single rule and save to output file
+    python convert_rule.py -r rule.yml -o output.xql
     
-    # Specify custom rule file and output
-    python convert_rule.py -r custom_rule.yml -o query_output.xql
+    # Batch convert all rules in a directory
+    python convert_rule.py -d /path/to/sigma/rules
+    
+    # Batch convert and save all queries to output directory
+    python convert_rule.py -d /path/to/sigma/rules -o output_queries/
     
     # View all available options
     python convert_rule.py --help
@@ -117,13 +120,23 @@ Use a simple Python script to load your custom pipeline, the backend, and a Sigm
 
 ### Command-Line Options
 
-- `-o OUTPUT, --output OUTPUT` - Output file path to write the XQL query
-- `-r RULE, --rule RULE` - Input Sigma rule file (default: rule.yml)
+- `-r RULE, --rule RULE` - Input Sigma rule file (single file mode)
+- `-d DIRECTORY, --directory DIRECTORY` - Directory containing Sigma rules for batch conversion
+- `-o OUTPUT, --output OUTPUT` - Output file path (single rule) or directory (batch mode)
 - `-h, --help` - Show help message and exit
+
+### Batch Processing
+
+When using `-d` to process a directory:
+- Recursively finds all `.yml` and `.yaml` files
+- Converts each rule to XQL format
+- Shows conversion summary with success/failure statistics
+- Optionally saves all queries to an output directory with `-o`
+- Preserves directory structure in output folder
 
 ### Example Output
 
-The script will produce a clean, ready-to-use XQL query:
+**Single Rule Conversion:**
 ```
 --- Starting Sigma to XSIAM Conversion ---
 Loading YAML pipeline...
@@ -134,7 +147,34 @@ Converting rule...
 
 ✅--- CONVERSION SUCCESSFUL ---✅
 Generated XSIAM Query:
-datamodel dataset = xdr_data | filter (xdm.source.process.command_line contains "Function Get-ADRExcelComOb" and xdm.source.process.command_line contains "Get-ADRGPO" and xdm.source.process.command_line contains "Get-ADRDomainController")
+datamodel dataset = * | filter (xdm.source.process.command_line contains "Function Get-ADRExcelComOb" and xdm.source.process.command_line contains "Get-ADRGPO" and xdm.source.process.command_line contains "Get-ADRDomainController")
+
+✅ Query saved to: output.xql
+```
+
+**Batch Directory Conversion:**
+```
+--- Starting Sigma to XSIAM Conversion ---
+Loading YAML pipeline...
+Pipeline loaded successfully.
+Initializing backend...
+Backend initialized successfully.
+
+Found 250 rule file(s) in /sigma/rules
+
+Converting: windows/process_creation/suspicious_command.yml... ✅ SUCCESS
+Converting: windows/network/suspicious_connection.yml... ✅ SUCCESS
+Converting: linux/auditd/privilege_escalation.yml... ✅ SUCCESS
+...
+
+============================================================
+CONVERSION SUMMARY
+============================================================
+Total rules processed: 250
+✅ Successful: 243 (97.20%)
+❌ Failed: 7 (2.80%)
+
+📁 Output directory: output_queries/
 ```
 
 ## Important Note
